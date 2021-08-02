@@ -1,0 +1,32 @@
+import pandas_datareader.data as pdr
+import datetime
+import time
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+
+
+# 多支股票导入
+
+ticker1 = 'JPM'
+ticker2 = 'BB'
+ticker3 = 'GOOGL'
+start = int(time.mktime(datetime.datetime(2020,1,1,23,59).timetuple()))
+end = int(time.mktime(datetime.datetime(2021,7,27,23,59).timetuple()))
+interval = '1d' #1d, 1m
+
+jpm = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker1}?period1={start}&period2={end}&interval={interval}&events=history&includeAdjustedClose=true'
+bb = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker2}?period1={start}&period2={end}&interval={interval}&events=history&includeAdjustedClose=true'
+googl = f'https://query1.finance.yahoo.com/v7/finance/download/{ticker3}?period1={start}&period2={end}&interval={interval}&events=history&includeAdjustedClose=true'
+
+
+chase = pd.read_csv(jpm)
+blackb = pd.read_csv(bb)
+google = pd.read_csv(googl)
+
+
+
+chase.set_index('Date', inplace=True)
+blackb.set_index('Date', inplace=True)
+google.set_index('Date', inplace=True)
